@@ -16,7 +16,7 @@ const platform = createSystem({
 await platform.connect();
 await platform.deploy();`;
 
-const files=["app/","  dashboard.tsx","  api/route.ts","core/","  system.ts","services/","  automation.ts","security/","  policy.ts"];
+const files=["app/","  dashboard.tsx","  api/route.ts","core/","  system.ts"];
 
 export default function ImmersiveHero(){
  const root=useRef<HTMLElement>(null); const [progress,setProgress]=useState(0);
@@ -36,7 +36,7 @@ export default function ImmersiveHero(){
     </div>
     <div className="ide-status"><span>main*</span><span>TypeScript&nbsp;&nbsp; UTF-8&nbsp;&nbsp; Texcortech Cloud</span></div>
    </div>
-   <div className="build-progress"><span>ENGINEERING SYSTEM</span><i><b style={{width:`${progress*100}%`}}/></i><strong>{Math.round(progress*100).toString().padStart(2,"0")}%</strong></div>
+   <div className="build-progress"><span>{stage<2?"WRITING SYSTEM":"BUILDING SYSTEM"}</span><i><b style={{width:`${progress*100}%`}}/></i><strong>{Math.round(progress*100).toString().padStart(2,"0")}%</strong></div>
   </div>
  </section>
 }
