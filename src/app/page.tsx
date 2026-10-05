@@ -1,14 +1,17 @@
 import HeroLoader from "@/components/HeroLoader";
-
-export default function Home() {
-  return (
-    <main>
-      <HeroLoader />
-      <section className="manifesto">
-        <p className="eyebrow">TEXCORTECH SYSTEMS</p>
-        <h2>We engineer the systems behind ambitious businesses.</h2>
-        <p>Software · Cloud · AI & Automation · Cybersecurity</p>
-      </section>
-    </main>
-  );
-}
+const capabilities=[
+ ["01","Software Engineering","Products built for scale.","Web platforms, marketplaces, operational systems and custom applications engineered around real business workflows."],
+ ["02","AI & Automation","Intelligence inside the workflow.","Practical AI, intelligent agents and automation that reduce repetitive work and improve decision velocity."],
+ ["03","Cloud Infrastructure","A resilient foundation.","Cloud architecture, deployment pipelines, integrations and infrastructure designed for performance and reliability."],
+ ["04","Cybersecurity","Trust engineered in.","Secure architecture, access control, data protection and defensive engineering embedded from the beginning."]
+];
+export default function Home(){return <main>
+ <header className="nav"><a className="brand" href="#">TEXCORTECH<span>.</span></a><nav><a href="#capabilities">Capabilities</a><a href="#work">Work</a><a href="#process">Process</a></nav><a className="nav-cta" href="#contact">Start a project</a></header>
+ <HeroLoader/>
+ <section className="intro"><p className="eyebrow">ONE CONNECTED SYSTEM</p><h2>We don’t bolt technology together.<br/><em>We engineer it as one.</em></h2><p>Strategy, experience, software, infrastructure, intelligence and security—designed to work as a coherent digital system.</p></section>
+ <section id="capabilities" className="chapters">{capabilities.map(([n,t,k,d])=><article className="chapter-card" key={n}><div className="chapter-num">{n}</div><div><p className="chapter-kicker">{k}</p><h3>{t}</h3><p>{d}</p></div><span>↗</span></article>)}</section>
+ <section id="work" className="work"><div><p className="eyebrow">SELECTED SYSTEMS</p><h2>Built beyond the interface.</h2></div><div className="work-grid"><article><b>COMMERCE</b><h3>Multi-vendor marketplace architecture</h3><p>Payments · seller operations · shipping · security</p></article><article><b>FINTECH</b><h3>Secure transaction experiences</h3><p>Identity · signing · workflows · infrastructure</p></article><article><b>OPERATIONS</b><h3>Business systems that connect teams</h3><p>Automation · data · dashboards · integrations</p></article></div></section>
+ <section id="process" className="process"><p className="eyebrow">HOW WE ENGINEER</p><div className="process-line"><span>01 Discover</span><span>02 Architect</span><span>03 Build</span><span>04 Harden</span><span>05 Evolve</span></div></section>
+ <section id="contact" className="contact"><p className="eyebrow">BUILD WHAT’S NEXT</p><h2>Have a complex idea?<br/><em>Make it real.</em></h2><a href="mailto:info@texcortech.co.ke">Start a conversation <span>↗</span></a></section>
+ <footer><b>TEXCORTECH SYSTEMS</b><p>Digital systems engineered in Kenya for ambitious organizations.</p><span>© 2026</span></footer>
+ </main>}
