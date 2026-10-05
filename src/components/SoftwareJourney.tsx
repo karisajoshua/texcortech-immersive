@@ -4,10 +4,10 @@ import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 
 const labels=[
- ["01","ASSEMBLE","We turn requirements into a working interface."],
- ["02","CONNECT","The interface connects to APIs and live data."],
- ["03","ADAPT","One product becomes responsive across devices."],
- ["04","SHIP","The complete system is tested and production ready."]
+ ["01","ASSEMBLE","Interface engineering","We translate product requirements into a clear, usable interface—building the components, states and interactions that shape the experience."],
+ ["02","CONNECT","Systems integration","The product connects to APIs, databases and business services so information can move reliably through the system in real time."],
+ ["03","ADAPT","Responsive experience","The same product adapts intelligently across desktop and mobile, preserving hierarchy, usability and performance on every screen."],
+ ["04","SHIP","Production engineering","We test, optimize and harden the completed system, then prepare it for a reliable production deployment."]
 ];
 
 export default function SoftwareJourney(){
@@ -15,7 +15,7 @@ export default function SoftwareJourney(){
  useEffect(()=>{gsap.registerPlugin(ScrollTrigger);const st=ScrollTrigger.create({trigger:root.current,start:"top top",end:"bottom bottom",scrub:true,onUpdate:self=>setProgress(self.progress)});return()=>st.kill()},[]);
  const stage=Math.min(3,Math.floor(progress*4));
  return <section ref={root} id="capabilities" className="software-story"><div className={"software-pin sw-stage-"+stage}>
-  <div className="sw-copy"><p className="eyebrow">01 / SOFTWARE ENGINEERING</p><h2>Watch a product<br/><em>come to life.</em></h2><div className="sw-caption"><b>{labels[stage][0]} / {labels[stage][1]}</b><p>{labels[stage][2]}</p></div><div className="sw-progress">{labels.map((x,i)=><i key={x[0]} className={i<=stage?"active":""}/>)}</div></div>
+  <div className="sw-copy"><p className="eyebrow">01 / SOFTWARE ENGINEERING</p><h2>Watch a product<br/><em>come to life.</em></h2><div className="sw-story-nav">{labels.map((item,i)=><div key={item[0]} className={i===stage?"current":i<stage?"complete":""}><span>{item[0]}</span><section><b>{item[1]}</b><small>{item[2]}</small></section><i/></div>)}</div><div className="sw-caption"><b>{labels[stage][0]} / {labels[stage][1]}</b><strong>{labels[stage][2]}</strong><p>{labels[stage][3]}</p></div></div>
   <div className="sw-visual">
    <div className="sw-browser">
     <div className="sw-browserbar"><i/><i/><i/><span>app.texcortech.system</span></div>
