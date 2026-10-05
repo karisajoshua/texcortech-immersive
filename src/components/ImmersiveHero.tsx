@@ -26,6 +26,13 @@ export default function ImmersiveHero(){
  const files=allFiles.slice(0,fileCount);
  const codeProgress=Math.max(0,Math.min(1,(progress-.28)/.34));
  const typed=source.slice(0,Math.floor(source.length*codeProgress));
+ const renderCode=(code:string)=>code.split(/("(?:[^"\\]|\\.)*")/g).map((part,i)=>{
+   if(part.startsWith('"')) return <span className="tok-string" key={i}>{part}</span>;
+   return <span key={i}>{part.split(/\b(import|from|const|await|true|false|createSystem|connect|deploy|product|runtime|database|intelligence|security)\b/g).map((t,j)=>{
+     const cls=["import","from","const","await","true","false"].includes(t)?"tok-keyword":["createSystem","connect","deploy"].includes(t)?"tok-function":["product","runtime","database","intelligence","security"].includes(t)?"tok-property":"";
+     return cls?<span className={cls} key={j}>{t}</span>:t;
+   })}</span>
+ });
  const command=progress>.66?"npm run build".slice(0,Math.floor("npm run build".length*Math.min(1,(progress-.66)/.08))):"";
  return <section ref={root} className="ide-hero">
   <div className="ide-stage">
@@ -36,7 +43,7 @@ export default function ImmersiveHero(){
      <aside><strong>PROJECT</strong>{stage===0?<span className="empty-tree">NO FOLDER OPEN</span>:<><small className="project-root">TEXCORTECH-SYSTEM</small>{files.map((x,i)=><span key={i} className={x.includes("system.ts")&&stage>=2?"active":""}>{x}</span>)}</>}</aside>
      <div className="editor">
       {stage===0?<div className="workspace-start"><div className="workspace-mark">T<span>.</span></div><strong>Start building a system.</strong><p>Create a workspace to begin.</p><div className="new-file-action"><i>＋</i><span>New project</span></div></div>:stage===1?<div className="creating-project"><span className="folder-icon">⌁</span><strong>Creating texcortech-system</strong><p>{files.length} / {allFiles.length} project files initialized</p><div className="create-bar"><i style={{width:`${files.length/allFiles.length*100}%`}}/></div><code>{files[files.length-1]||"initializing..."}</code></div>:<>
-       <div className="tabs"><span>system.ts <b>×</b></span></div><div className="code"><div className="lines">{Array.from({length:14},(_,i)=><i key={i}>{i+1}</i>)}</div><pre>{typed}<em className="cursor"/></pre></div>
+       <div className="tabs"><span>system.ts <b>×</b></span></div><div className="code"><div className="lines">{Array.from({length:14},(_,i)=><i key={i}>{i+1}</i>)}</div><pre>{renderCode(typed)}<em className="cursor"/></pre></div>
        <div className={"terminal "+(stage>=3?"show":"")}><div><b>TERMINAL</b><span>PROBLEMS&nbsp;&nbsp; OUTPUT</span></div><p>$ {command}<em className={stage===3?"terminal-cursor":""}/></p>{stage>=4&&<><p className="dim">Creating optimized production system...</p><p className="success">✓ Software compiled</p><p className="success">✓ Infrastructure connected</p><p className="success">✓ Intelligence online</p><p className="success">✓ Security policies active</p><strong>PRODUCTION READY</strong></>}</div>
       </>}
      </div>
