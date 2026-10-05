@@ -32,6 +32,6 @@ export default function SoftwareJourney(){
    <div className={"sw-ready "+(stage===3?"walkthrough-ready":"")}><i>✓</i><div><small>DEPLOYMENT</small><b>Production ready</b></div></div>
    <div className="sw-orbit orbit-a"/><div className="sw-orbit orbit-b"/>
   </div>
-  <div className="sw-callout"><small>PRODUCT WALKTHROUGH</small><b>{labels[stage][1]}</b><p>{labels[stage][3]}</p></div><div className="sw-stage-label"><span>{labels[stage][1]}</span><b>{Math.round(progress*100)}%</b></div>
+  <div className="sw-stage-label"><span>{labels[stage][1]}</span><b>{Math.round(progress*100)}%</b></div>
  </div></section>
 }
