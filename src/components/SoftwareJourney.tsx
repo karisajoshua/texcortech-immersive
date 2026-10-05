@@ -21,9 +21,16 @@ export default function SoftwareJourney(){
     <div className="sw-browserbar"><i/><i/><i/><span>app.texcortech.system</span></div>
     <div className="sw-appnav"><strong>ARC</strong><span className="active">Overview</span><span>Analytics</span><span>Customers</span><span>Automations</span><div className="sw-search">⌕ Search</div><b/></div>
     <div className="sw-dashboard">
-     <div className="sw-welcome"><small>OVERVIEW</small><h3>Business at a glance.</h3><button>+ New project</button></div>
-     <div className={"sw-cards sw-focus-"+stage}><article><small>REVENUE</small><strong>$84.2K</strong><em>+12.4%</em></article><article><small>USERS</small><strong>12,480</strong><em>+8.1%</em></article><article><small>CONVERSION</small><strong>4.82%</strong><em>+1.2%</em></article></div>
-     <div className={"sw-panels sw-focus-"+stage}><div className="sw-chart"><small>PERFORMANCE</small><div>{[42,63,48,78,58,88,72,96].map((h,i)=><i key={i} style={{height:h+"%"}}/>)}</div></div><div className="sw-feed"><small>LIVE ACTIVITY</small><p><i/>Payment received</p><p><i/>Account created</p><p><i/>Data synchronized</p></div></div>
+     <div className="sw-welcome"><div><small>EXECUTIVE OVERVIEW</small><h3>Good morning, Alex.</h3><p>Here is what is happening across your business today.</p></div><button>Export report</button></div>
+     <div className={"sw-cards sw-focus-"+stage}>
+      <article className="metric-violet"><div><small>NET REVENUE</small><span>↗</span></div><strong>$284,920</strong><em>+18.2% this month</em><i className="sparkline">⌁⌁⌁</i></article>
+      <article className="metric-cyan"><div><small>ACTIVE USERS</small><span>◎</span></div><strong>24,892</strong><em>+9.4% this month</em><i className="sparkline">⌁⌁⌁</i></article>
+      <article className="metric-green"><div><small>CONVERSION</small><span>◇</span></div><strong>8.74%</strong><em>+2.1% this month</em><i className="sparkline">⌁⌁⌁</i></article>
+     </div>
+     <div className={"sw-panels sw-focus-"+stage}>
+      <div className="sw-chart"><div className="panel-head"><div><small>REVENUE ANALYTICS</small><strong>$284.9K</strong></div><span>Last 7 months</span></div><div className="line-chart"><svg viewBox="0 0 420 90" preserveAspectRatio="none"><defs><linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#6c63ff" stopOpacity=".22"/><stop offset="100%" stopColor="#6c63ff" stopOpacity="0"/></linearGradient></defs><path className="area" d="M0 70 C45 63 65 72 105 52 S165 58 205 37 S270 48 315 24 S370 32 420 12 L420 90 L0 90 Z"/><path className="line" d="M0 70 C45 63 65 72 105 52 S165 58 205 37 S270 48 315 24 S370 32 420 12"/><circle cx="420" cy="12" r="3"/></svg><div className="chart-labels"><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span></div></div></div>
+      <div className="sw-sidepanel"><div className="donut-wrap"><small>GOAL PROGRESS</small><div className="donut"><strong>78%</strong></div><p>$284K of $365K</p></div><div className="sw-feed"><small>LIVE ACTIVITY</small><p><i/>Enterprise payment <b>now</b></p><p><i/>Customer onboarded <b>2m</b></p><p><i/>Workflow completed <b>4m</b></p></div></div>
+     </div>
     </div>
    </div>
    <div className="sw-code"><span>system.ts</span><code><b>const</b> product = build(<em>connected</em>);</code></div>
