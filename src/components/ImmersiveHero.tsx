@@ -1,35 +1,42 @@
 "use client";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Stars, Line } from "@react-three/drei";
-import { useEffect,useRef } from "react";
-import * as THREE from "three";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-function Node({p=[0,0,0] as [number,number,number],hot=false}){return <mesh position={p}><sphereGeometry args={[.075,16,16]}/><meshStandardMaterial color={hot?"#ff6a00":"#9ca3af"} emissive={hot?"#ff4d00":"#111827"} emissiveIntensity={hot?3:.4} metalness={.5}/></mesh>}
-function DataPath({points}:{points:[number,number,number][]}){return <Line points={points} color="#ff6a00" lineWidth={.7} transparent opacity={.35}/>}
-function InfrastructureEngine(){
- const root=useRef<THREE.Group>(null),cpu=useRef<THREE.Group>(null),cloud=useRef<THREE.Group>(null),ai=useRef<THREE.Group>(null),security=useRef<THREE.Group>(null);
- useFrame((state,d)=>{if(root.current)root.current.rotation.y+=d*.025;if(security.current)security.current.rotation.z-=d*.08});
- useEffect(()=>{gsap.registerPlugin(ScrollTrigger);const groups=[cpu.current,cloud.current,ai.current,security.current].filter(Boolean) as THREE.Group[];groups.forEach((g,i)=>{g.visible=i===0;g.scale.setScalar(i===0?1:0.55)});
- const ctx=gsap.context(()=>{gsap.utils.toArray<HTMLElement>(".scene-trigger").forEach((el,i)=>{const active=groups[i];if(!active)return;ScrollTrigger.create({trigger:el,start:"top 62%",end:"bottom 38%",onEnter:()=>show(i),onEnterBack:()=>show(i)});const show=(idx:number)=>{groups.forEach((g,j)=>{if(j===idx){g.visible=true;gsap.fromTo(g.scale,{x:.62,y:.62,z:.62},{x:1.18,y:1.18,z:1.18,duration:.75,ease:"power3.out"});gsap.to(g.rotation,{y:idx*.45,duration:1})}else{gsap.to(g.scale,{x:.35,y:.35,z:.35,duration:.35,onComplete:()=>{g.visible=false}})}})}});gsap.utils.toArray<HTMLElement>(".work-trigger,.process-trigger").forEach(el=>ScrollTrigger.create({trigger:el,start:"top 60%",onEnter:()=>groups.forEach(g=>g.visible=false),onEnterBack:()=>groups.forEach(g=>g.visible=false)}))});return()=>ctx.revert()},[]);
- return <group ref={root} position={[2.15,.05,0]} rotation={[.12,-.18,0]} scale={1.18}>
-  <group ref={cpu}>
-   <mesh><icosahedronGeometry args={[.62,2]}/><meshStandardMaterial color="#ff6a00" emissive="#ff4d00" emissiveIntensity={2.6} metalness={.9} roughness={.16}/></mesh>
-   <mesh scale={1.16}><icosahedronGeometry args={[.62,1]}/><meshStandardMaterial color="#ffb067" wireframe transparent opacity={.28} emissive="#ff6a00" emissiveIntensity={1.4}/></mesh>
-   {[1.05,1.42,1.78].map((r,i)=><mesh key={r} rotation={[i*.62,Math.PI/2+i*.35,i*.48]}><torusGeometry args={[r,i===1?.065:.035,12,96]}/><meshStandardMaterial color={i===1?"#ff6a00":"#4a505a"} emissive={i===1?"#9a3000":"#000000"} emissiveIntensity={1.7} metalness={1} roughness={.14}/></mesh>)}
-   {Array.from({length:8}).map((_,i)=>{const a=i/8*Math.PI*2;return <group key={i} position={[Math.cos(a)*1.42,Math.sin(a)*1.42,(i%2-.5)*.28]} rotation={[0,0,a]}><mesh><boxGeometry args={[.34,.18,.42]}/><meshStandardMaterial color="#151922" metalness={.95} roughness={.2}/></mesh><mesh position={[0,0,.225]}><boxGeometry args={[.19,.07,.02]}/><meshStandardMaterial color={i%3===0?"#ff6a00":"#626873"} emissive={i%3===0?"#ff4d00":"#000"} emissiveIntensity={2}/></mesh></group>})}
-   <DataPath points={[[-1.65,0,.05],[-.7,0,.1],[0,0,.2],[.7,0,.1],[1.65,0,.05]]}/>
-   <DataPath points={[[0,-1.65,.05],[0,-.7,.1],[0,0,.2],[0,.7,.1],[0,1.65,.05]]}/>
-   {[[1.9,0],[-1.9,0],[0,1.9],[0,-1.9]].map(([x,y],i)=><Node key={i} p={[x,y,.05]} hot={i<2}/>)}
-  </group>
-  <group ref={cloud}>{[-.75,0,.75].map((x,i)=><group key={i} position={[x,0,i*.16]}><mesh><boxGeometry args={[.55,2.1,.6]}/><meshStandardMaterial color="#151922" metalness={.88} roughness={.22}/></mesh>{[-.65,0,.65].map((y,j)=><Node key={j} p={[0,y,.34]} hot={i===1&&j===1}/>)}</group>)}<DataPath points={[[ -1.2,0,.4],[1.2,0,.4]]}/></group>
-  <group ref={ai}>{Array.from({length:14}).map((_,i)=>{const a=i/14*Math.PI*2,r=i%3===0?1.35:.85;return <Node key={i} p={[Math.cos(a)*r,Math.sin(a)*r,(i%2)*.25]} hot={i%4===0}/>})}<DataPath points={[[-1.2,.2,.1],[-.35,.8,.25],[.55,.55,.1],[1.2,-.15,.25],[.2,-.9,.1],[-1.2,.2,.1]]}/><DataPath points={[[0,1.2,.1],[.65,.1,.25],[-.6,-.55,.1],[0,1.2,.1]]}/></group>
-  <group ref={security}><mesh><icosahedronGeometry args={[1.05,1]}/><meshStandardMaterial color="#11151c" wireframe metalness={1}/></mesh>{[1.3,1.6,1.9].map((r,i)=><mesh key={i} rotation={[i*.65,i*.35,Math.PI/4]}><torusGeometry args={[r,.035,10,64]}/><meshStandardMaterial color={i===1?"#ff6a00":"#59606c"} emissive={i===1?"#6b2000":"#000"} emissiveIntensity={1.2} metalness={1}/></mesh>)}</group>
- </group>
-}
+const source=`import { createSystem } from "@/core/system";
+
+const platform = createSystem({
+  product: "digital-platform",
+  runtime: "edge",
+  database: "postgres",
+  intelligence: true,
+  security: "zero-trust"
+});
+
+await platform.connect();
+await platform.deploy();`;
+
+const files=["app/","  dashboard.tsx","  api/route.ts","core/","  system.ts","services/","  automation.ts","security/","  policy.ts"];
+
 export default function ImmersiveHero(){
- const root=useRef<HTMLElement>(null);
- useEffect(()=>{gsap.registerPlugin(ScrollTrigger);const ctx=gsap.context(()=>{gsap.to(".hero-copy",{opacity:0,y:-90,scrollTrigger:{trigger:root.current,start:"top top",end:"48% top",scrub:true}});gsap.fromTo(".system-label",{opacity:0},{opacity:1,scrollTrigger:{trigger:root.current,start:"25% top",end:"45% top",scrub:true}})},root);return()=>ctx.revert()},[]);
- return <section ref={root} id="system-story" className="hero persistent-world"><div className="canvas-wrap persistent-canvas" aria-hidden="true"><Canvas dpr={[1,1.5]} camera={{position:[0,0,7.4],fov:36}} gl={{antialias:true,powerPreference:"high-performance"}}><color attach="background" args={["#050608"]}/><fog attach="fog" args={["#050608",8,17]}/><ambientLight intensity={.45}/><directionalLight position={[4,5,6]} intensity={3}/><pointLight position={[-3,-2,4]} color="#ff6a00" intensity={30}/><Stars radius={70} depth={45} count={450} factor={1.4} fade speed={.2}/><Float speed={.7} rotationIntensity={.06} floatIntensity={.18}><InfrastructureEngine/></Float></Canvas></div><div className="system-label"><span>LIVE SYSTEM / 01</span><b>SOFTWARE</b><b>CLOUD</b><b>INTELLIGENCE</b><b>SECURITY</b></div><div className="hero-copy"><p className="eyebrow">TEXCORTECH / DIGITAL ENGINEERING</p><h1>Systems that<br/><span>move business.</span></h1><p className="lede">We engineer connected digital products—from interface to infrastructure, intelligence and security.</p><a className="hero-cta" href="#capabilities">Explore the system <b>↘</b></a><div className="scroll-cue">SCROLL TO DECONSTRUCT <i/></div></div></section>
+ const root=useRef<HTMLElement>(null); const [progress,setProgress]=useState(0);
+ useEffect(()=>{gsap.registerPlugin(ScrollTrigger);const st=ScrollTrigger.create({trigger:root.current,start:"top top",end:"bottom bottom",scrub:true,onUpdate:s=>setProgress(s.progress)});return()=>st.kill()},[]);
+ const typed=source.slice(0,Math.floor(source.length*Math.min(progress*1.55,1)));
+ const stage=progress<.22?0:progress<.48?1:progress<.72?2:3;
+ return <section ref={root} className="ide-hero">
+  <div className="ide-stage">
+   <div className="hero-copy ide-copy"><p className="eyebrow">TEXCORTECH / DIGITAL ENGINEERING</p><h1>Systems that<br/><span>move business.</span></h1><p className="lede">We engineer connected digital products—from software to infrastructure, intelligence and security.</p><a className="hero-cta" href="#capabilities">See how we build <b>↘</b></a><div className="scroll-cue">SCROLL TO BUILD <i/></div></div>
+   <div className={"ide-window stage-"+stage}>
+    <div className="ide-titlebar"><div><i/><i/><i/></div><span>texcortech-system — workspace</span><b>BUILD / 01</b></div>
+    <div className="ide-body">
+     <aside><strong>EXPLORER</strong><small>TEXCORTECH-SYSTEM</small>{files.map((x,i)=><span key={i} className={i===4?"active":""}>{x}</span>)}</aside>
+     <div className="editor"><div className="tabs"><span>system.ts <b>×</b></span></div><div className="code"><div className="lines">{Array.from({length:14},(_,i)=><i key={i}>{i+1}</i>)}</div><pre>{typed}<em className="cursor"/></pre></div>
+      <div className={"terminal "+(stage>=2?"show":"")}><div><b>TERMINAL</b><span>PROBLEMS&nbsp;&nbsp; OUTPUT</span></div><p>$ npm run build</p>{stage>=3&&<><p className="dim">Creating optimized production system...</p><p className="success">✓ Software compiled</p><p className="success">✓ Infrastructure connected</p><p className="success">✓ Intelligence online</p><p className="success">✓ Security policies active</p><strong>PRODUCTION READY</strong></>}</div>
+     </div>
+    </div>
+    <div className="ide-status"><span>main*</span><span>TypeScript&nbsp;&nbsp; UTF-8&nbsp;&nbsp; Texcortech Cloud</span></div>
+   </div>
+   <div className="build-progress"><span>ENGINEERING SYSTEM</span><i><b style={{width:`${progress*100}%`}}/></i><strong>{Math.round(progress*100).toString().padStart(2,"0")}%</strong></div>
+  </div>
+ </section>
 }
