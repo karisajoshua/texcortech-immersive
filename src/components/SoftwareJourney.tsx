@@ -19,7 +19,7 @@ export default function SoftwareJourney(){
   <div className="sw-visual">
    <div className="sw-browser">
     <div className="sw-browserbar"><i/><i/><i/><span>app.texcortech.system</span></div>
-    <div className="sw-appnav"><strong>T.</strong><span>Overview</span><span>Projects</span><span>Customers</span><b/></div>
+    <div className="sw-appnav"><strong>ARC</strong><span className="active">Overview</span><span>Analytics</span><span>Customers</span><span>Automations</span><div className="sw-search">⌕ Search</div><b/></div>
     <div className="sw-dashboard">
      <div className="sw-welcome"><small>OVERVIEW</small><h3>Business at a glance.</h3><button>+ New project</button></div>
      <div className="sw-cards"><article><small>REVENUE</small><strong>$84.2K</strong><em>+12.4%</em></article><article><small>USERS</small><strong>12,480</strong><em>+8.1%</em></article><article><small>CONVERSION</small><strong>4.82%</strong><em>+1.2%</em></article></div>
