@@ -27,8 +27,8 @@ export default function SystemsJourney(){
      <div className="cloud-health"><span><i/>API <b>healthy</b></span><span><i/>Database <b>12ms</b></span><span><i/>Workers <b>8 active</b></span><span><i/>Deploy <b>v2.8.4</b></span></div>
     </div>
     <div className="security-scene">
-     <div className="security-ring"><div className="shield">✓</div><span className="sec-a">IDENTITY <b>verified</b></span><span className="sec-b">ACCESS <b>authorized</b></span><span className="sec-c">DATA <b>encrypted</b></span><span className="sec-d">THREATS <b>blocked</b></span></div>
-     <div className="security-events"><small>SECURITY EVENTS</small><p><i/>Session verified <b>PASS</b></p><p><i/>RBAC policy evaluated <b>PASS</b></p><p><i/>Payload encrypted <b>AES-256</b></p></div>
+     <div className="security-console"><div className="sec-head"><div><small>SECURITY POSTURE</small><strong>Protected</strong></div><span><i/> LIVE</span></div><div className="sec-score"><div className="sec-gauge"><strong>98</strong><small>/100</small></div><div><b>Excellent security posture</b><p>Critical controls are active and continuously monitored.</p></div></div><div className="sec-controls"><article><i>✓</i><div><b>Identity</b><span>MFA · SSO</span></div><em>VERIFIED</em></article><article><i>✓</i><div><b>Authorization</b><span>RBAC · Policies</span></div><em>ENFORCED</em></article><article><i>✓</i><div><b>Data protection</b><span>AES-256 · TLS</span></div><em>ENCRYPTED</em></article></div></div>
+     <div className="security-events"><div className="sec-event-head"><small>THREAT MONITOR</small><b>0 critical</b></div><p><i/>Suspicious login blocked <span>IP reputation</span><b>BLOCKED</b></p><p><i/>API request inspected <span>WAF policy</span><b>SAFE</b></p><p><i/>Session verified <span>Identity</span><b>PASS</b></p><p><i/>Payload encrypted <span>Data layer</span><b>AES-256</b></p></div>
     </div>
    </div>
    <div className="systems-status"><i/><span>{stage===0?"AUTOMATION RUNNING":stage===1?"ALL SYSTEMS OPERATIONAL":"SYSTEM PROTECTED"}</span></div>
