@@ -1,5 +1,6 @@
 import HeroLoader from "@/components/HeroLoader";
 import SoftwareJourney from "@/components/SoftwareJourney";
+import SystemsJourney from "@/components/SystemsJourney";
 const capabilities=[
  ["01","Software Engineering","Products built for scale.","Web platforms, marketplaces, operational systems and custom applications engineered around real business workflows."],
  ["02","AI & Automation","Intelligence inside the workflow.","Practical AI, intelligent agents and automation that reduce repetitive work and improve decision velocity."],
@@ -10,7 +11,7 @@ export default function Home(){return <main>
  <header className="nav"><a className="brand" href="#">TEXCORTECH<span>.</span></a><nav><a href="#capabilities">Capabilities</a><a href="#work">Work</a><a href="#process">Process</a></nav><a className="nav-cta" href="#contact">Start a project</a></header>
  <HeroLoader/><div id="world-end" aria-hidden="true"/>
  <section className="intro"><p className="eyebrow">ONE CONNECTED SYSTEM</p><h2>We don’t bolt technology together.<br/><em>We engineer it as one.</em></h2><p>Strategy, experience, software, infrastructure, intelligence and security—designed to work as a coherent digital system.</p></section>
- <SoftwareJourney/><section className="chapters immersive-chapters">{capabilities.slice(1).map(([n,t,k,d], index)=><article className="chapter-card scene-trigger" data-scene={index+1} key={n}><div className="chapter-num">{n}</div><div><p className="chapter-kicker">{k}</p><h3>{t}</h3><p>{d}</p></div><span>↗</span></article>)}</section>
+ <SoftwareJourney/><SystemsJourney/>
  <section id="work" className="work work-scene"><div><p className="eyebrow">SELECTED SYSTEMS</p><h2>Built beyond the interface.</h2></div><div className="work-grid"><article className="work-trigger"><b>COMMERCE</b><h3>Multi-vendor marketplace architecture</h3><p>Payments · seller operations · shipping · security</p></article><article className="work-trigger"><b>FINTECH</b><h3>Secure transaction experiences</h3><p>Identity · signing · workflows · infrastructure</p></article><article className="work-trigger"><b>OPERATIONS</b><h3>Business systems that connect teams</h3><p>Automation · data · dashboards · integrations</p></article></div></section>
  <section id="process" className="process process-scene"><p className="eyebrow">HOW WE ENGINEER</p><div className="process-line"><span className="process-trigger">01 Discover</span><span className="process-trigger">02 Architect</span><span className="process-trigger">03 Build</span><span className="process-trigger">04 Harden</span><span className="process-trigger">05 Evolve</span></div></section>
  <section id="contact" className="contact"><p className="eyebrow">BUILD WHAT’S NEXT</p><h2>Have a complex idea?<br/><em>Make it real.</em></h2><a href="mailto:info@texcortech.co.ke">Start a conversation <span>↗</span></a></section>
