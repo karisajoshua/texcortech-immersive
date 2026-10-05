@@ -1,4 +1,5 @@
-import HeroLoader from "@/components/HeroLoader";\nimport SoftwareJourney from "@/components/SoftwareJourney";
+import HeroLoader from "@/components/HeroLoader";
+import SoftwareJourney from "@/components/SoftwareJourney";
 const capabilities=[
  ["01","Software Engineering","Products built for scale.","Web platforms, marketplaces, operational systems and custom applications engineered around real business workflows."],
  ["02","AI & Automation","Intelligence inside the workflow.","Practical AI, intelligent agents and automation that reduce repetitive work and improve decision velocity."],
